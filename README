@@ -1,0 +1,12 @@
+bthesis.tex
+--> 本体
+preliminary_draft.tex
+--> 卒論発表予稿
+
+csis-bcommon.sty
+csis-jbthesis.sty
+--> 卒論用スタイルファイル
+
+csis-preliminary-utf8.sty
+csis-preliminary.sty
+--> 予稿用スタイルファイル 

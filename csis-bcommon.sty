@@ -1,0 +1,227 @@
+% 
+% csis-bcommon.sty: bchelor's thesis common style in CSIS.
+%
+% This file is called by csis-jbthesis.sty.
+%
+%
+%\typeout{section}
+\def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+     \def\@svsec{}\else 
+     \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname
+      \ifnum #2=1\fi\hskip 0.6em }\fi
+     \@tempskipa #5\relax
+      \ifdim \@tempskipa>\z@ 
+        \begingroup #6\relax
+          \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}%
+        \endgroup
+       \csname #1mark\endcsname{#7}\addcontentsline
+         {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                      \protect\numberline{\csname the#1\endcsname
+                       \ifnum #2=1\fi}\fi
+                    #7}\else
+        \def\@svsechd{#6\hskip #3\@svsec #8\csname #1mark\endcsname
+                      {#7}\addcontentsline
+                           {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                             \protect\numberline{\csname the#1\endcsname
+                              \ifnum #2=1.\fi}\fi
+                       #7}}\fi
+     \@xsect{#5}}
+%
+% today
+%
+%\typeout{jpntoday}
+\newif\if西暦\let\if西暦=\iffalse \def\西暦{\let\if西暦=\iftrue}
+\def\jpntoday{{\if西暦\count0=\year\else%
+\count0=\year\advance\count0 -1988 平成\,\fi%
+\number\count0\,年\hspace{.5em}\nobreak%
+\number\month\,月\hspace{.5em}\nobreak\number\day\,日}}
+%
+\newcount\nendo
+\def\nendostr{{\ifnum\month<4\nendo=\year\advance\nendo -1989\else%
+\nendo=\year\advance\nendo -1988\fi%
+平成{\ifnum\nendo=1{元}\else\number\nendo\fi}年度}}
+%
+%\typeout{engtoday}
+\def\engtoday{
+\ifcase\month\or
+ January\or February\or March\or April\or May\or June\or
+ July\or August\or September\or October\or November\or December\fi
+ \space\number\day, \number\year}
+%
+%\typeout{current time}
+\newcount\curmin \newcount\hour \newcount\onehour \newcount\curhour
+\onehour=60
+\hour=\time
+\divide\hour by\onehour
+\curhour=\hour
+\multiply\hour by-\onehour
+\curmin=\time
+\advance\curmin by\hour
+\def\curtime{{\number\curhour 時\number\curmin 分}}
+\def\ecurtime{{\number\curhour:\number\curmin}}
+%
+% Language
+%
+\newcommand{\lang}[1]{}
+%
+% title page items
+%
+%\typeout{commands...}
+%% \def\studentnumberstr{xxxxxxx}
+%% \newcommand{\studentnumber}[1]{
+%%         \def\studentnumberstr{#1}
+%% }
+%
+\newcommand{\doctitle}[1]{
+        \def\doctitlestr{#1}
+        \def\bthesis{1}
+        \def\jdoctitle{\ifcase\doctitlestr\or{学士論文}\fi}
+}
+%
+\def\titlestr{Title}
+\renewcommand{\title}[1]{
+        \def\titlestr{#1}
+}
+%
+%% \newcommand{\ptitle}[1]{}
+%
+\def\etitlestr{Title}
+\newcommand{\etitle}[1]{
+        \def\etitlestr{#1}
+}
+%
+%% \newcommand{\eptitle}[1]{}
+%
+%
+\def\authorstr{I am the author}
+\renewcommand{\author}[1]{
+        \def\authorstr{#1}
+}
+%
+%% \newcommand{\pauthor}[1]{}
+%
+\def\eauthorstr{I am the author}
+\newcommand{\eauthor}[1]{
+        \def\eauthorstr{#1}
+}
+%
+%% \newcommand{\epauthor}[1]{}
+%
+%
+\def\syearstr{}
+\newcommand{\syear}[1]{
+ \def\syearstr{#1}
+}
+%
+\def\smonthstr{}
+\newcommand{\smonth}[1]{
+ \def\smonthstr{#1}
+}
+%
+\def\sdaystr{}
+\newcommand{\sday}[1]{
+ \def\sdaystr{#1}
+}
+%
+\def\datestr{\syearstr\,年\hspace{.3em}\nobreak%
+\smonthstr\,月\hspace{.3em}\nobreak\sdaystr\,日}
+%
+\def\edatestr{
+\ifcase\smonthstr\or
+ January\or February\or March\or April\or May\or June\or
+ July\or August\or September\or October\or November\or December\fi
+ \space\sdaystr, \syearstr}
+%
+%
+\newcommand{\laboratory}[1]{
+  \def\labname{#1}
+}
+
+\newcommand{\division}[1]{}
+%
+% committee members' page items
+%
+\newcommand{\major}[1]{
+        \def\majorstr{#1}
+        \def\engineering{1}
+        %% \def\science{2}
+        \def\jmajorstr{\ifcase\majorstr\or{工学}\fi}
+        \def\emajorstr{\ifcase\majorstr\or{ENGINEERING}\fi}
+}
+%
+\def\firstcmember{}
+\def\firstposition{}
+
+\newcommand{\cmembers}[2]{
+        \def\firstcmember{#1}
+        \def\firstposition{#2}
+}
+
+%
+\def\efirstcmember{}
+\def\efirstposition{}
+
+\newcommand{\ecmembers}[2]{
+        \def\efirstcmember{#1}
+        \def\efirstposition{#2}
+}
+
+%\typeout{keywords}
+\def\keywordsstr{keyword1, keyword2}
+\newcommand{\keywords}[1]{
+        \def\keywordsstr{#1}
+}
+
+%\typeout{ekeywords}
+\def\ekeywordsstr{keyword1, keyword2}
+\newcommand{\ekeywords}[1]{
+        \def\ekeywordsstr{#1}
+}
+
+%\typeout{abstract}
+\def\abstracttext{This is the abstract.}
+\renewcommand{\abstract}[1]{
+        \def\abstracttext{#1}
+}
+
+\def\eabstracttext{This is the abstract.}
+\newcommand{\eabstract}[1]{
+        \def\eabstracttext{#1}
+}
+
+\newcommand{\jabstractpage}{
+  %% \setlength{\textwidth}{40zw}    %行長全角40文字
+  \begin{center}
+    \Large{\bf 要　　旨}
+  \end{center}
+  \vspace*{2mm}
+  \par
+  \abstracttext
+  \vspace*{5mm}
+  \begin{center}
+    {\bf キーワード } \underline{\keywordsstr}
+  \end{center}
+}
+%
+\newcommand{\eabstractpage}{
+  %% \setlength{\textwidth}{40zw}    %行長全角40文字
+  \begin{center}
+    \Large{\bf Abstract}
+  \end{center}
+  \vspace*{2mm}
+  \par
+  \eabstracttext
+  \vspace*{5mm}
+  \begin{center}
+    {\bf keywords } \underline{\ekeywordsstr}
+  \end{center}
+}
+
+%\typeout{toc}
+\newcommand{\toc}{
+  \if\isfinal\yes
+  \newpage
+  \tableofcontents
+  \fi
+  %% \thispagestyle{empty}
+}

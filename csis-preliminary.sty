@@ -1,0 +1,101 @@
+%% \twocolumn
+%% \setlength{\columnsep}{5mm}
+%% \setlength{\textwidth}{165mm}
+%% \setlength{\textheight}{265mm}
+%% \setlength{\oddsidemargin}{-2mm}
+%% \setlength{\headheight}{0mm}
+%% \setlength{\topskip}{0pt}
+%% \setlength{\headsep}{0mm}
+\setlength{\topmargin}{-5mm}
+
+\pagestyle{empty}
+
+\normalsize
+
+%% \def\thesection {\arabic{section}.}
+%% \def\thesubsection {\thesection\arabic{subsection}}
+
+%% \def\section{\@startsection{section}{1}{0pt}
+%%   {12pt plus 1pt minus 1pt}{6pt plus 1pt minus 1pt}{\large\bf}}
+%% \def\subsection{\@startsection{subsection}{2}{0pt}
+%%   {6pt plus 1pt minus 1pt}{.01pt plus .5pt minus .5pt}%
+%%   {\normalsize\bf}}
+
+%%
+%%
+\def\maketitle{\par
+  \begingroup
+  \twocolumn[\@maketitle] 
+  \thispagestyle{plain}
+  \endgroup
+  \thispagestyle{empty}
+  \let\maketitle\relax
+  \let\@maketitle\relax
+}
+
+\newcommand{\byear}[1]{
+  \def\@byear{#1}
+}
+
+\newcommand{\etitle}[1]{
+  \def\@etitle{#1}
+}
+
+\newcommand{\supervisor}[1]{
+  \def\@supervisor{#1}
+}
+
+\renewcommand{\abstract}[1]{
+  \def\@abstract{#1}
+}
+
+\def\@maketitle{\newpage
+  \null
+  \vskip-5mm
+      {
+        \begin{center}
+          \textgt{
+            {\Large \@byear 年度卒業論文発表会予稿}
+          }
+        \end{center}
+      }
+      {\begin{flushright}
+          \textgt{
+            {\large \@date}
+          }
+        \end{flushright}
+      }
+      {\centering
+        {\LARGE
+          \textgt{
+            {\@title}\\
+            \vskip3mm
+            {\@etitle}
+          }
+        }
+        \\
+      }
+      \par
+      \vskip10mm
+      {\large
+        \textgt{
+        \begin{flushleft}
+        発表者： \@author\\
+        指導教員： \@supervisor\\
+        要旨：\\
+        \end{flushleft}
+        }
+      }
+      %% \vskip-3mm
+      {\large
+        \textgt{
+          \@abstract
+        }
+      }
+      %% \par
+      %% \vskip5mm
+      %% %% \rule{\textwidth}{.5pt} 
+      %% \par
+      %% \vskip5mm
+}
+\endinput
